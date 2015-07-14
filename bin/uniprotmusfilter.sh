@@ -119,9 +119,9 @@ fi
 #
 LASTRUN_FILE=${INPUTDIR}/lastrun
 NEW_FILES=1
+
 if [ -f ${LASTRUN_FILE} ]
 then
-    echo 'testing date of trembl file'
     if env test ${LASTRUN_FILE} -nt ${INPUT_FILE_TR} 
     then
 
@@ -134,7 +134,7 @@ then
         echo "${INPUT_FILE_SP}  has not been updated" | tee -a ${LOG_PROC}
         NEW_FILES=0
     fi
-    if [ ${NEW_FILES} -eq 1 ]
+    if [ ${NEW_FILES} -eq 0 ]
     then
         echo "Input files have not been updated - skipping load" | tee -a ${LOG_PROC}
         # unlock the input directory
@@ -180,7 +180,7 @@ run ()
 
 
 # run the filter
-run
+#run
 
 #
 # unlock the input directory
