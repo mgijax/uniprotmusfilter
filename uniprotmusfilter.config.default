@@ -1,0 +1,104 @@
+#format: sh
+#######################################################################
+#                                                                     #
+# Configuration for seqdb_engine                                      #
+#                                                                     #
+#######################################################################
+
+#
+#  If the MGICONFIG environment variable does not have a local override,
+#  use the default "live" settings.
+#
+if [ "${MGICONFIG}" = "" ]
+then
+    MGICONFIG=/usr/local/mgi/live/mgiconfig
+    export MGICONFIG
+fi
+
+# establish name of master config and source it
+CONFIG_MASTER=${MGICONFIG}/master.config.sh
+
+export CONFIG_MASTER
+
+. ${CONFIG_MASTER}
+
+##########################################################################
+##
+##  LOAD SPECIFIC SETTINGS
+##
+############################################################################
+#
+## Full path the the input, output, logs, reports, and archive directories
+FILEDIR=${DATALOADSOUTPUT}/mgi/uniprotmusfilter
+INPUTDIR=${FILEDIR}/input
+LOGDIR=${FILEDIR}/logs
+RPTDIR=${FILEDIR}/reports
+OUTPUTDIR=${FILEDIR}/output
+ARCHIVEDIR=${FILEDIR}/archive
+
+export FILEDIR INPUTDIR LOGDIR RPTDIR OUTPUTDIR ARCHIVEDIR
+
+#  Full path of the log files
+LOG_PROC=${LOGDIR}/uniprotmusfilter.proc.log
+LOG_DIAG=${LOGDIR}/uniprotmusfilter.diag.log
+LOG_CUR=${LOGDIR}/uniprotmusfilter.cur.log
+LOG_VAL=${LOGDIR}/uniprotmusfilter.val.log
+
+export LOG_PROC LOG_DIAG LOG_CUR LOG_VAL
+
+# input files
+UNIPROTDIR=${DATADOWNLOADS}/uniprot
+INPUT_FILE_SP=${UNIPROTDIR}/swissprot/uniprot_sprot.dat.gz
+INPUT_FILE_TR=${UNIPROTDIR}/trembl/uniprot_trembl.dat.gz
+
+export UNIPROTDIR INPUT_FILE_SP INPUT_FILE_TR
+
+# output file
+SPTR_MOUSE_DAT=${DATADOWNLOADS}/uniprot/uniprotmus.dat
+
+export SPTR_MOUSE_DAT
+
+# Java CLASSPATH
+# Need path to the following:
+# 1) MGI Java libraries:
+#       lib_java_core 
+#       lib_java_seqrecord 
+#       lib_java_seqfilter 
+# 2) classes
+
+JAVA_LIB=${MGI_JAVALIB}/core.jar:${MGI_JAVALIB}/seqrecord.jar:${MGI_JAVALIB}/seqfilter.jar:${JGETOPT}
+
+CLASSPATH=.:${UNIPROTMUSFILTER}/classes:${JAVA_LIB}:${JGETOPT}:${COMMON_CLASSPATH}
+
+export JAVA_LIB CLASSPATH
+
+# set the java memory limit
+JAVARUNTIMEOPTS="-Xms2G -Xmx2G"
+
+export JAVARUNTIMEOPTS 
+
+#
+# Lock configuration
+#
+
+LOCKNAME=uniprotmusfilter
+
+MIRROR_LOCK=${MIRROR_WGET}/mirror_lock
+
+# mirror_lock parameter to request a read lock
+READ_LOCK=rlock
+
+# mirror_lock parameter to request a write lock
+WRITE_LOCK=wlock
+
+# mirror_lock parameter to request unlock
+UNLOCK=unlock
+
+export LOCKNAME MIRROR_LOCK READ_LOCK WRITE_LOCK UNLOCK
+
+
+MAIL_LOADNAME="Uniprot Mouse Sequence Filter"
+
+INSTALLDIR=${UNIPROTMUSFILTER}
+export MAIL_LOADNAME INSTALLDIR 
+
