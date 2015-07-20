@@ -180,7 +180,7 @@ run ()
 
 
 # run the filter
-#run
+run
 
 #
 # unlock the input directory
