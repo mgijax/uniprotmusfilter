@@ -1,3 +1,9 @@
+TAG: uniprotmusfilter-6-0-0-2
+DATE: 8/25/2015
+STAFF: dbm
+CHANGES:
+1) bin/uniprotmusfilter.sh: Use "test" instead of "env test"
+
 TAG: uniprotmusfilter-6-0-0-1
 DATE: 7/24/2015
 STAFF: dbm
