@@ -122,13 +122,13 @@ NEW_FILES=1
 
 if [ -f ${LASTRUN_FILE} ]
 then
-    if env test ${LASTRUN_FILE} -nt ${INPUT_FILE_TR} 
+    if test ${LASTRUN_FILE} -nt ${INPUT_FILE_TR} 
     then
 
         echo "${INPUT_FILE_TR}  has not been updated" | tee -a ${LOG_PROC}
 	NEW_FILES=0
     fi
-    if env test ${LASTRUN_FILE} -nt ${INPUT_FILE_SP}
+    if test ${LASTRUN_FILE} -nt ${INPUT_FILE_SP}
     then
 
         echo "${INPUT_FILE_SP}  has not been updated" | tee -a ${LOG_PROC}
