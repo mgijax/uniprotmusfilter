@@ -1,3 +1,9 @@
+TAG: uniprotmusfilter-6-0-15-1
+DATE: 6/29/2020
+STAFF: dbm
+CHANGES:
+1) uniprotmusfilter.config.default: added JOBSTREAM setting for radar
+
 TAG: uniprotmusfilter-6-0-0-2
 DATE: 8/25/2015
 STAFF: dbm
