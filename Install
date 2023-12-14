@@ -43,10 +43,12 @@ else
     installFailed
 fi
 
+echo "$JAVA"
+
 # compile java classes
 cd src
 echo "Compiling uniprotfilter source code in ${TOP}/bin"
-javac -d ${TOP}/classes *.java 
+${JAVA_HOME}/bin/javac -d ${TOP}/classes *.java 
 echo "Install complete"
 
 #

@@ -165,7 +165,7 @@ run ()
     # run uniprot mus filter
     #
     gunzip -c ${INPUT_FILE_SP} ${INPUT_FILE_TR} \
-        | java -DLOG=${LOG_PROC} SPOrganismFilter \
+        |  ${JAVA} -DLOG=${LOG_PROC} SPOrganismFilter \
         --mouse -o ${SPTR_MOUSE_DAT}
     STAT=$?
     checkStatus ${STAT} ${UNIPROTMUSFILTER} ${CONFIG_LOAD}}
